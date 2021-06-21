@@ -45,21 +45,18 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         type=parse_to_list,
         dest='start_key',
         default=None,
-        help=(
-            'Starting key position if not the root of the document. This needs'
-            ' to be an object type (dict) not and array (list). Specified in jq'
-            ' notation, eg :- .first_key.second_key.third_key'
-        ),
+        help=('Starting key position if not the root of the document. This does'
+              ' not support integer references for arrays, it currently only'
+              ' works for object keys. Specified in jq notation, eg :-'
+              ' .first_key.second_key.third_key'),
     )
     parser.add_argument(
         '--max-size',
         type=string_to_int,
         dest='max_size',
         default="6144",
-        help=(
-            'Maximum document size. Default configured for IAM policies which'
-            ' is currently 6144'
-        ),
+        help=('Maximum document size. Default configured for IAM policies which'
+              ' is currently 6144'),
     )
     parser.add_argument('filenames', nargs='*', help='Filenames to check')
     args = parser.parse_args(argv)
