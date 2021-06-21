@@ -1,4 +1,4 @@
-from hooks import aws_policy_size
+from src import aws_policy_size
 
 
 def test_aws_policy_size():
