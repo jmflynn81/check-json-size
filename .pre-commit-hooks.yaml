@@ -1,0 +1,5 @@
+-   id: check-json-size
+    name: Check size of JSON document
+    description: Checks the non-whitespace charater size of a JSON object against a maximum value
+    entry: check-json-size
+    language: python

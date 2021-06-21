@@ -1,0 +1,12 @@
+{
+    "Roles": [
+        {
+            "account": "1",
+            "rule": "bob"
+        },
+        {
+            "account": "2",
+            "rule": "claire"
+        }
+    ]
+}
