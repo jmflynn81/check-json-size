@@ -32,7 +32,7 @@ def parse_to_list(start_key:str) -> list:
 
 
 def string_to_int(max_size:str) -> Union[int, str]:
-    try:    
+    try:
         return int(max_size)
     except ValueError:
         return max_size
@@ -58,6 +58,12 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         help=('Maximum document size. Default configured for IAM policies which'
               ' is currently 6144'),
     )
+    parser.add_argument(
+        '--verbose',
+        action='store_true',
+        dest='verbose',
+        help=('verbose output, print size of every policy'),
+    )
     parser.add_argument('filenames', nargs='*', help='Filenames to check')
     args = parser.parse_args(argv)
     status = 0
@@ -65,25 +71,27 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     if type(args.max_size) is not int:
         print('Max size must be an integer number')
         return 1
-    
+
     for filename in args.filenames:
         try:
             pydict = get_json(filename)
         except ValueError:
             print(f'Input File {filename} is not a valid JSON document')
             return 1
-        
+
         policy_size = get_policy_size(pydict, args.start_key)
-        
+
         if policy_size is None:
             return 1
-        
+
         if policy_size > args.max_size:
             print(f'{filename}: JSON object size of {policy_size} characters is'
                   f' greater than the specified maximum of {args.max_size}'
                   f' characters')
             status = 1
-    
+        elif args.verbose:
+            print(f'{filename}: {policy_size} characters')
+
     return status
 
 
