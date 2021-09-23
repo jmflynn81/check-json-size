@@ -11,7 +11,7 @@ keys.)
 
 The project was initially created as a means of quickly validating the length of
 an AWS IAM policy. This is the reason behind the default maximum size of 6144 non
-whitespace characters. 
+whitespace characters.
 
 ## Usage
 
@@ -28,3 +28,9 @@ Specify start key in JQ notation (does not support integer references for arrays
 only works for object keys)...
 
 > check-json-size --start-key .key1.key2.key3 document.json
+
+## Developing
+
+### Running tests
+
+`python3 setup.py test`
